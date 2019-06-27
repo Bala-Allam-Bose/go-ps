@@ -13,6 +13,8 @@ type DarwinProcess struct {
 	pid    int
 	ppid   int
 	binary string
+	cpu int
+	mem int
 }
 
 func (p *DarwinProcess) Pid() int {
@@ -25,6 +27,14 @@ func (p *DarwinProcess) PPid() int {
 
 func (p *DarwinProcess) Executable() string {
 	return p.binary
+}
+
+func (p *DarwinProcess) Computer() string {
+	return p.cpu
+}
+
+func (p *DarwinProcess) Memory() string {
+	return p.mem
 }
 
 func findProcess(pid int) (Process, error) {
@@ -67,6 +77,8 @@ func processes() ([]Process, error) {
 			pid:    int(p.Pid),
 			ppid:   int(p.PPid),
 			binary: darwinCstring(p.Comm),
+			cpu:	int(p.Computer),
+			mem:	int(p.Memory),
 		}
 	}
 
@@ -135,4 +147,8 @@ type kinfoProc struct {
 	_    [301]byte
 	PPid int32
 	_    [84]byte
+	Computer int32
+	_
+	Memory int32
+	_
 }
