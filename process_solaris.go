@@ -83,6 +83,8 @@ func (p *UnixProcess) Refresh() error {
 
 	p.ppid = int(psinfo.Pr_ppid)
 	p.binary = toString(psinfo.Pr_fname[:], 16)
+	p.cpu = int(psinfo.Pr_pctcpu)
+	p.mem = int(psinfo.Pr_pctmem)
 	return nil
 }
 
