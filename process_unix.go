@@ -19,6 +19,8 @@ type UnixProcess struct {
 	sid   int
 
 	binary string
+	cpu innt
+	mem int
 }
 
 func (p *UnixProcess) Pid() int {
@@ -32,6 +34,15 @@ func (p *UnixProcess) PPid() int {
 func (p *UnixProcess) Executable() string {
 	return p.binary
 }
+
+func (p *UnixProcess) Computer() string {
+	return p.cpu
+}
+
+func (p *UnixProcess) Memory() string {
+	return p.mem
+}
+
 
 func findProcess(pid int) (Process, error) {
 	dir := fmt.Sprintf("/proc/%d", pid)
