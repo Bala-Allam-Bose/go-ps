@@ -148,7 +148,7 @@ type kinfoProc struct {
 	PPid int32
 	_    [84]byte
 	Computer int32
-	_
+	_    [40]byte
 	Memory int32
-	_
+	_    [40]byte
 }
